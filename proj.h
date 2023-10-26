@@ -19,7 +19,7 @@ typedef struct {
 } ListaDeClientes;
 
 int criarCliente(ListaDeClientes *lt);
-int apagarCliente(ListaDeClientes *lt);
+int apagarCliente(const char *arquivo, const char *cpf, const char *senha);
 int listarClientes(ListaDeClientes lt);
 int debitarCliente(ListaDeClientes *lt);
 int depositaCliente(ListaDeClientes *lt);

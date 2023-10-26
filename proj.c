@@ -46,6 +46,13 @@ int criarCliente(ListaDeClientes *lc){
 
     return 0;
 }
+int apagarCliente(const char *arquivo, const char *cpf, const char *senha) {
+
+    return 0;
+}
+
+
+
 void printMenu(){
     printf("Menu:\n");
     printf("1. Criar Cliente\n");
@@ -61,6 +68,7 @@ void printMenu(){
 int salvarLista(ListaDeClientes lc, char nome[]){return 0;}
 int carregarLista(ListaDeClientes *lc,char nome[]){return 1;}
 
+//
 //#include "proj.h"
 //#include <stdio.h>
 //
@@ -84,30 +92,30 @@ int carregarLista(ListaDeClientes *lc,char nome[]){return 1;}
 //    }
 //    //
 //
-//    Tarefa novatarfea;
+//    Tarefa novatarefa;
+//
+//
+//    if (lt->qtd >= 100){
+//        printf("Limite maximo de tarefas atingido, delete uma antes de continuar\n");
+//        fclose(f);
+//        return 1;
+//    }
+//
 //
 //    // Pedindo Categoria, Descrição e Prioriade ao usuário
 //    printf("Escreva sua tarefa: \n");
-//    scanf("%s",novatarfea.categoria);
+//    scanf("%s",novatarefa.categoria);
 //
 //    printf("Descreva sua tarefa: \n");
-//    scanf("%s",novatarfea.descricao);
+//    scanf("%s",novatarefa.descricao);
 //
 //    printf("Qual a prioridade: \n");
-//    scanf("%d",&novatarfea.prioriade);
+//    scanf("%d",&novatarefa.prioriade);
 //    //
 //
 //    // Contando o número de tarefas
-//    lt->tarefas[lt->qtd] = novatarfea;
+//    lt->tarefas[lt->qtd] = novatarefa;
 //    lt->qtd++;
-//    //
-//
-//    // Escrevendo a lista atualizada no arquivo
-//    fwrite(lt->tarefas, sizeof(Tarefa), lt->qtd, f);
-//    //
-//
-//    // Fechando o arquivo
-//    fclose(f);
 //    //
 //
 //    // Indicação de Sucesso
@@ -118,33 +126,55 @@ int carregarLista(ListaDeClientes *lc,char nome[]){return 1;}
 //
 //
 //int deletarTarefa(ListaDeTarefas *lt){
-//    printf("deletar tarefa\n");
+//
+//    int resposta;
+//
+//    // Mensagem para o usuário
+//    printf("Qual tarefa deseja deletar?\n");
+//    //
+//
+//    // Scan para ver a resposta do usuario
+//    scanf("%d",&resposta);
+//    //
+//
+//    // Verificar se o número fornecido é válido
+//    if (resposta >= 0 && resposta < lt->qtd) {
+//        // Remover a tarefa da lista
+//        for (int i = resposta; i < lt->qtd - 1; i++) {
+//            lt->tarefas[i] = lt->tarefas[i + 1];
+//        }
+//        lt->qtd--;
+//        printf("Tarefa excluida com sucesso!\n");
+//    } if (resposta == 221){
+//        lt->qtd=0;
+//    } else {
+//        printf("Numero de tarefa invalido. Nenhuma tarefa foi excluida.\n");
+//    }
+//    // Código para deletar todas as tarefas de uma vez
+//
+//
+//    // Indicação de Sucesso
 //    return 0;
+//    //
 //}
 //int listarTarefas(ListaDeTarefas lt){
-//
-//    // Abrindo o arquivo
-//    FILE *f = fopen("arquivo.bin", "r");
-//    //
+//    int i = 0;
 //
 //    // Mensagem para o usuário
 //    printf("Tarefas cadastradas: \n");
 //    //
 //
-//    // Creando váriavel de leitura no formato Struct de Tarefa
-//    Tarefa tarefalida;
-//    //
+//    printf("lt.qtd: %d\n", lt.qtd);
 //
-//    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço de tarefalida
-//    while (fread(&tarefalida,sizeof(Tarefa),1,f)==1){
-//        printf("Categoria: %s\n", tarefalida.categoria);
-//        printf("Descricao: %s\n", tarefalida.descricao);
-//        printf("Prioridade: %d\n", tarefalida.prioriade);
+//
+//    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço lt
+//    while (i<lt.qtd){
+//        printf("%d. Categoria: %s\n",i, lt.tarefas[i].categoria);
+//        printf("Descricao: %s\n", lt.tarefas[i].descricao);
+//        printf("Prioridade: %d\n", lt.tarefas[i].prioriade);
+//
+//        i++;
 //    }
-//    //
-//
-//    // Fecha o arquivo
-//    fclose(f);
 //    //
 //
 //    // Indicação de Sucesso
@@ -152,6 +182,51 @@ int carregarLista(ListaDeClientes *lc,char nome[]){return 1;}
 //    //
 //}
 //
-//void printMenu(){ printf("Menu:\n");}
-//int salvarLista(ListaDeTarefas lt, char nome[]){return 0;}
-//int carregarLista(ListaDeTarefas *lt,char nome[]){return 1;}
+//void printMenu(){
+//    printf("Menu:\n ");
+//    printf("1. Criar Tarefa\n ");
+//    printf("2. Deletar Tarefa\n ");
+//    printf("3. Listar Tarefas\n ");
+//
+//}
+//int salvarLista(ListaDeTarefas lt, char nome[]){
+//
+//    // Abrindo o arquivo como write
+//    FILE *f= fopen("arquivo.bin", "wb");
+//    //
+//
+//    if(f==NULL){
+//        return 1;
+//    }
+//    // Escrevendo a lista atualizada no arquivo
+//    fwrite(&lt, sizeof(ListaDeTarefas), 1, f);
+//    //
+//
+//    // Fechando o arquivo
+//    fclose(f);
+//    //
+//
+//    // Indicação de Sucesso
+//    return 0;}
+////
+//
+//int carregarLista(ListaDeTarefas *lt,char nome[]){
+//
+//    // Abrindo o arquivo como read
+//    FILE *f = fopen("arquivo.bin", "rb");
+//    //
+//
+//    if(f==NULL)
+//        return 1;
+//
+//    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço de tarefalida
+//    fread(lt,sizeof(ListaDeTarefas),1,f);
+//    //
+//
+//    //Fecha o arquivo
+//    fclose(f);
+//    //
+//
+//    // Indicação de Sucesso
+//    return 0;}
+////
