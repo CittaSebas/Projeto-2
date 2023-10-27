@@ -18,13 +18,13 @@ typedef struct {
     int qtd;
 } ListaDeClientes;
 
-int criarCliente(ListaDeClientes *lt);
-int apagarCliente(const char *arquivo, const char *cpf, const char *senha);
+int criarCliente(ListaDeClientes lt);
+int apagarCliente(const chararquivo, const char cpf, const charsenha);
 int listarClientes(ListaDeClientes lt);
-int debitarCliente(ListaDeClientes *lt);
-int depositaCliente(ListaDeClientes *lt);
-int extratoCliente(ListaDeClientes *lt);
-int transferenciaCliente(ListaDeClientes *lt);
+int debitarCliente(ListaDeClientes lt);
+int depositaCliente(ListaDeClienteslt);
+int extratoCliente(ListaDeClientes lt);
+int transferenciaCliente(ListaDeClienteslt);
 
 
 
