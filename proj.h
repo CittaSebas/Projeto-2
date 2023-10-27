@@ -9,7 +9,7 @@ typedef struct {
     char nome[20];
     char cpf[10];
     char tipodeconta[5];
-    int valorinicial;
+    float valorinicial;
     char senha[10];
 } Cliente;
 
@@ -18,11 +18,11 @@ typedef struct {
     int qtd;
 } ListaDeClientes;
 
-int criarCliente(ListaDeClientes lt);
-int apagarCliente(const chararquivo, const char cpf, const charsenha);
-int listarClientes(ListaDeClientes lt);
-int debitarCliente(ListaDeClientes lt);
-int depositaCliente(ListaDeClienteslt);
+int criarCliente(ListaDeClientes *lc);
+int apagarCliente(ListaDeClientes *lc);
+int listarClientes(ListaDeClientes lc);
+int debitarCliente(ListaDeClientes *lc);
+int depositoCliente(ListaDeClientes *lc);
 int extratoCliente(ListaDeClientes lt);
 int transferenciaCliente(ListaDeClienteslt);
 

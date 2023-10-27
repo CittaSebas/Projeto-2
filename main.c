@@ -1,53 +1,59 @@
 #include <stdio.h>
 #include "proj.h"
 
+
 int main() {
-
-    int cod;
-    char arquivo[] = "clientes";
-    ListaDeClientes lc;
-
-    cod = carregarLista(&lc,arquivo);
-    if (cod == 1)
-        lc.qtd = 0;
-
     int opcao;
+    char arquivo[] = "clientes.bin"; // Nome do arquivo para salvar e carregar os dados
+    ListaDeClientes lc;
+    int cod;
 
-    do{
+    cod = carregarLista(&lc, arquivo);
+
+    if (cod == 1) {
+        lc.qtd = 0; // Inicializa a quantidade de clientes se houver um erro ao carregar
+    }
+
+    do {
         printMenu();
         scanf("%d", &opcao);
-        printf("%d\n",opcao);
 
-        if(opcao ==0){}
-        else if(opcao ==1){
-            criarCliente(&lc);
-        }
-        else if(opcao ==2){
-            apagarCliente(&lc);
-        }
-        else if(opcao ==3){
-            listarClientes(lc);
-        }
-        else if(opcao ==4){
-            debitarCliente(&lc);
-        }
-        else if(opcao ==5){
-            depositaCliente(&lc);
-        }
-        else if(opcao ==6){
-            extratoCliente(&lc);
-        }
-        else if(opcao ==7){
-            transferenciaCliente(&lc);
-        }
-        else{
-            printf("Opcao nao existe\n");
+        switch (opcao) {
+            case 0:
+                break;
+            case 1:
+                criarCliente(&lc);
+                break;
+            case 2:
+                apagarCliente(&lc);
+                break;
+            case 3:
+                listarClientes(lc);
+                break;
+            case 4:
+                debitarCliente(&lc);
+                break;
+            case 5:
+                depositoCliente(&lc);
+                break;
+            case 6:
+                // Implemente a função de extratoCliente
+                break;
+            case 7:
+                // Implemente a função de transferenciaCliente
+                break;
+            default:
+                printf("Opção não existe\n");
+                break;
         }
 
-    }while(opcao !=0);
+    } while (opcao != 0);
 
-    cod = salvarLista(lc,arquivo);
-    if (cod !=0)
-        printf("Erro ao salvar as tarefas");
+    cod = salvarLista(lc, arquivo);
 
+    if (cod != 0) {
+        printf("Erro ao salvar os dados dos clientes.\n");
+    }
+
+    return 0;
 }
