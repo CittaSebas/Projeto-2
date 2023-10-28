@@ -12,7 +12,7 @@ typedef struct {
     float valorinicial;
     char senha[10];
 } Cliente;
-
+//GITHUB
 typedef struct {
     Cliente clientes[1000];
     int qtd;
@@ -24,7 +24,7 @@ int listarClientes(ListaDeClientes lc);
 int debitarCliente(ListaDeClientes *lc);
 int depositoCliente(ListaDeClientes *lc);
 int extratoCliente(ListaDeClientes lt);
-int transferenciaCliente(ListaDeClienteslt);
+int transferenciaCliente(ListaDeClientes lc);
 
 
 
