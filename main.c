@@ -13,7 +13,6 @@ int main() {
     if (cod == 1) {
         lc.qtd = 0; // Inicializa a quantidade de clientes se houver um erro ao carregar
     }
-
     do {
         printMenu();
         scanf("%d", &opcao);
