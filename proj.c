@@ -16,19 +16,9 @@ void printMenu(){
     printf("4. Debitar Cliente\n");
     printf("5. Depositar Cliente\n");
     printf("6. Extrato Cliente\n");
-    printf("7. Transferencia Cliente\n");
+    printf("7. Transferencia Cliente\n");}
 
-}/*
-void addEntryToExtrato(ListaDeClientes *lc, const char *descricao, double valor, double taxa) {
-    if (lc->clientes->qtdExtrato < 50) {
-        *//*strcpy(lc->clientes->extrato[lc->clientes->qtdExtrato].descricao, descricao);*//*
-        lc->clientes->extrato[lc->clientes->qtdExtrato].valor = valor;
-        lc->clientes->extrato[lc->clientes->qtdExtrato].taxa = taxa;
-        lc->clientes->qtdExtrato++;
-    } else {
-        printf("Transaction history full. Cannot add more entries.\n");
-    }
-}*/
+
 int salvarLista(ListaDeClientes lc, char nome[]){ // Abrindo o arquivo no modo WB
     FILE *f= fopen("clientes", "wb");
     //
@@ -107,7 +97,7 @@ int criarCliente(ListaDeClientes *lc){
     scanf("%s",novocliente.senha);
     //
 
-    // Contando o número de tarefas
+    // Adicionando o cliente e aumentando a quantidade de clientes
     lc->clientes[lc->qtd] = novocliente;
     lc->qtd++;
     //
@@ -160,7 +150,7 @@ int listarClientes(ListaDeClientes lc) { // função 3
 int debitarCliente(ListaDeClientes *lc) {
     char cpfDigitado[12];
     char senhaDigitada[11];
-    double valorDebito,taxa;
+    float valorDebito,taxa;
     printf("Digite o CPF: ");
     scanf("%s", cpfDigitado);
     printf("Digite a Senha: ");
@@ -208,18 +198,23 @@ int debitarCliente(ListaDeClientes *lc) {
 int depositoCliente(ListaDeClientes *lc) {
     char cpfDigitado[12];
     float valordeposito;
-
+    char senhaDigitada[20];
 
     printf("Digite o CPF: ");
     scanf("%s", cpfDigitado);
-    printf("Digite o valor a ser depositado: ");
-    scanf("%f", &valordeposito);
+
+    printf("Digite a Senha: ");
+    scanf("%s", senhaDigitada);
+
 
     int clienteEncontrado = 0;
 
     for (int i = 0; i < lc->qtd; i++) {
-        if (strcmp(cpfDigitado, lc->clientes[i].cpf) == 0) {
-            // Se o CPF estiver correto, deposite na conta do cliente
+        if (strcmp(cpfDigitado, lc->clientes[i].cpf ) == 0&& strcmp(senhaDigitada, lc->clientes[i].senha ) ==0) {
+            printf("Conta validada \n");
+            printf("Digite o valor a ser depositado: ");
+            scanf("%f", &valordeposito);
+            // Se o CPF e a senha estiverem corretas, deposite na conta do cliente
             lc->clientes[i].valorinicial += valordeposito;
             printf("Valor depositado com sucesso!\n");
             clienteEncontrado = 1;
@@ -235,4 +230,59 @@ int depositoCliente(ListaDeClientes *lc) {
 }
 
 
-// Função 6
+//Funcao 7 Transferencia entre clientes
+
+int transferenciaCliente(ListaDeClientes *lc){
+    char cpfDigitado[12];
+    char senhaDigitada[11];
+    char cpfDestino[12];
+    float valorDebito;
+
+    printf("Digite o CPF: ");
+    scanf("%s", cpfDigitado);
+    printf("Digite a Senha: ");
+    scanf("%s", senhaDigitada);
+    //Checkagem de senha e cpf
+    for (int i = 0; i < lc->qtd; i++) {
+        if (strcmp(cpfDigitado, lc->clientes[i].cpf ) == 0&& strcmp(senhaDigitada, lc->clientes[i].senha ) ==0){
+            printf("Digite o CPF da conta destino: ");
+            scanf("%s", cpfDestino);
+            for(int j =0; j<lc->qtd; j++){
+                //Checkagem do destinatario
+                if (strcmp(cpfDestino, lc->clientes[j].cpf) == 0){
+                    printf("Destinatario encontrado com sucesso.\n Digite o valor a ser depositado na conta destino: ");
+                    scanf("%f", &valorDebito);
+                    //Processamento da transacao
+                    if(strcmp("plus", lc->clientes[i].tipodeconta ) == 0){
+                        if(lc->clientes[i].valorinicial - valorDebito>=-5000){
+                            lc->clientes[i].valorinicial = lc->clientes[i].valorinicial - valorDebito;
+                            lc->clientes[j].valorinicial += valorDebito;
+                            printf("Operacao concluida com sucesso");
+                        }
+                        else{
+                            printf("Saldo Insuficiente");
+                        }
+
+                    }
+                    //Processamento da transacao
+                    else if(strcmp("comum", lc->clientes[i].tipodeconta) == 0){
+                        if(lc->clientes[i].valorinicial - valorDebito>= -1000){
+                            lc->clientes[i].valorinicial -= valorDebito;
+                            lc->clientes[j].valorinicial += valorDebito;
+                            printf("Operacao concluida com sucesso");
+                        }
+                        else{
+                            printf("Saldo insuficiente");
+                        }
+                    }
+
+                }
+                //Mensagem de Erro caso nao encontre o CPF
+                else{
+                    printf("CPF nao encontrado.");
+                }
+            }
+        }
+    }
+
+    };

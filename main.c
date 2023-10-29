@@ -39,7 +39,7 @@ int main() {
                 // Implemente a função de extratoCliente
                 break;
             case 7:
-                // Implemente a função de transferenciaCliente
+                transferenciaCliente(&lc);
                 break;
             default:
                 printf("Opção não existe\n");
