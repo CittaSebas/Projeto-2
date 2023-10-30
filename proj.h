@@ -5,7 +5,6 @@
 #ifndef PROJETO_2_PROJ_H
 #define PROJETO_2_PROJ_H
 
-
 typedef struct {
     char nome[20];
     char cpf[10];
@@ -25,7 +24,8 @@ int debitarCliente(ListaDeClientes *lc);
 int depositoCliente(ListaDeClientes *lc);
 int transferenciaCliente(ListaDeClientes *lc);
 void printMenu();
-int salvarLista(ListaDeClientes lt,char nome[]);
-int carregarLista(ListaDeClientes *lt, char nome[]);
+int salvarLista(ListaDeClientes lc,char nome[]);
+int carregarLista(ListaDeClientes *lc, char nome[]);
+
 
 #endif //PROJETO_2_PROJ_H
